@@ -2,13 +2,21 @@ package exercise;
 
 import java.util.List;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 // BEGIN
 class App {
-    public static List<String> getCountOfFreeEmails(List<String> emails){
-        long count = emails.stream()
-                .count("@gmail.com", "@yandex.ru", "@hotmail.com");
-        return count;
+
+    private static final List<String> FREE_DOMAINS = Arrays.asList(
+            "gmail.com", "yandex.ru", "hotmail.com"
+    );
+
+    public static long getCountOfFreeEmails(List<String> emails) {
+        return emails
+                .stream()
+                .map(email -> email.split("@")[1])
+                .filter(FREE_DOMAINS::contains)
+                .count();
     }
 }
 // END
