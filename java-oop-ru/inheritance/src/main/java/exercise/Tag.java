@@ -1,66 +1,29 @@
 package exercise;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class Tag {
-    protected String name;
-    protected Map<String, String> attributes;
 
-    public Tag(String name, Map<String, String> attributes) {
-        this.name = name;
-        this.attributes = attributes;
-    }
+        private String name;
+        private Map<String, String> attributes;
 
-    protected abstract String getTagName();
-
-    protected abstract boolean isSingleTag();
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<");
-        sb.append(getTagName());
-        for (String attrName : attributes.keySet()) {
-            sb.append(" ");
-            sb.append(attrName);
-            sb.append("=\"");
-            sb.append(attributes.get(attrName));
-            sb.append("\"");
+        Tag(String name, Map<String, String> attributes) {
+            this.name = name;
+            this.attributes = attributes;
         }
-        if (isSingleTag()) {
-            sb.append(" />");
-        } else {
-            sb.append(">");
-            sb.append(getBody());
-            for (Tag child : children()) {
-                sb.append(child.toString());
-            }
-            sb.append("</");
-            sb.append(getTagName());
-            sb.append(">");
+
+        public String stringifyAttributes() {
+            return attributes.keySet().stream()
+                    .map(key -> {
+                        String value = attributes.get(key);
+                        return String.format(" %s=\"%s\"", key, value);
+                    })
+                    .collect(Collectors.joining(""));
         }
-        return sb.toString();
-    }
 
-    protected String getBody() {
-        return "";
-    }
-
-    protected Iterable<Tag> children() {
-        return new Iterable<Tag>() {
-            @Override
-            public java.util.Iterator<Tag> iterator() {
-                return new java.util.Iterator<Tag>() {
-                    @Override
-                    public boolean hasNext() {
-                        return false;
-                    }
-
-                    @Override
-                    public Tag next() {
-                        return null;
-                    }
-                };
-            }
-        };
-    }
+        public String getName() {
+            return name;
+        }
 }
+

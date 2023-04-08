@@ -2,16 +2,13 @@ package exercise;
 
 import java.util.Map;
 
-public class SingleTag extends Tag {
-    public SingleTag(String name, Map<String, String> attributes) {
+class SingleTag extends Tag {
+
+    SingleTag(String name, Map<String, String> attributes) {
         super(name, attributes);
     }
 
-    protected String getTagName() {
-        return name;
-    }
-
-    protected boolean isSingleTag() {
-        return true;
+    public String toString() {
+        return String.format("<%s%s>", getName(), stringifyAttributes());
     }
 }
