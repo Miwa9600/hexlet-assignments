@@ -1,11 +1,9 @@
 package exercise;
 
 // BEGIN
-public class NegativeRadiusException extends Exception {
-    public NegativeRadiusException(String s) {
-        super("Radius cannot be negative");
+class NegativeRadiusException extends Exception {
+    NegativeRadiusException(String msg) {
+        super(msg);
     }
 }
-
-
 // END
