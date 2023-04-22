@@ -17,28 +17,24 @@ public class CompaniesServlet extends HttpServlet {
                       HttpServletResponse response)
             throws IOException, ServletException {
 
-        response.setContentType("text/html");
-
-        String search = request.getParameter("search");
-
-        List<String> companies = getCompanies().stream()
-                .filter(company -> search == null || company.contains(search))
-                .toList();
-
         PrintWriter out = response.getWriter();
-        out.println("<html>");
-        out.println("<head><title>Companies List</title></head>");
-        out.println("<body>");
-        if (companies.isEmpty()) {
+
+        List<String> companies = getCompanies();
+
+        String searchString = request.getParameter("search") == null
+                ? ""
+                : request.getParameter("search");
+
+        List<String> filteredCompanies = companies
+                .stream()
+                .filter(company -> company.contains(searchString))
+                .collect(Collectors.toList());
+
+        if (filteredCompanies.isEmpty()) {
             out.println("Companies not found");
-        } else {
-            out.println("<ul>");
-            for (String company : companies) {
-                out.println("<li>" + company + "</li>");
-            }
-            out.println("</ul>");
+            return;
         }
-        out.println("</body></html>");
-        out.close();
+
+        filteredCompanies.forEach(company -> out.println(company));
     }
 }
