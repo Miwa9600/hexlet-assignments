@@ -164,16 +164,9 @@ public class UsersServlet extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
-        String updatedId = getNextId();
-
-        Map<String, String> UpdatedUser = new HashMap<>();
-        user.put("id", id);
-        user.put("firstName", firstName);
-        user.put("lastName", lastName);
-        user.put("email", email);
 
         if (firstName.isEmpty() || lastName.isEmpty()) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/new.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/edit.jsp");
             request.setAttribute("user", user);
             request.setAttribute("error", "Имя и Фамилия не могут быть пустыми");
             response.setStatus(422);
@@ -181,7 +174,10 @@ public class UsersServlet extends HttpServlet {
             return;
         }
 
-        users.add(user);
+        user.put("firstName", firstName);
+        user.put("lastName", lastName);
+        user.put("email", email);
+
         response.sendRedirect("/users");
         // END
     }
