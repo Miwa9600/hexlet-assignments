@@ -161,24 +161,9 @@ public class UsersServlet extends HttpServlet {
         }
 
         // BEGIN
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-
-        if (firstName.isEmpty() || lastName.isEmpty()) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/new.jsp");
-            request.setAttribute("user", user);
-            request.setAttribute("error", "Имя и Фамилия не могут быть пустыми");
-            response.setStatus(422);
-            requestDispatcher.forward(request, response);
-            return;
-        }
-
-        user.put("firstName", firstName);
-        user.put("lastName", lastName);
-        user.put("email", email);
-
-        response.sendRedirect("/users");
+        request.setAttribute("user", user);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/edit.jsp");
+        requestDispatcher.forward(request, response);
         // END
     }
 
