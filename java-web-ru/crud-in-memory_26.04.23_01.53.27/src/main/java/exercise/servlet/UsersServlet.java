@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.tomcat.jni.User;
 
 import static exercise.Data.getUsers;
 import static exercise.Data.getNextId;
@@ -36,10 +35,10 @@ public class UsersServlet extends HttpServlet {
 
     private Map<String, String> getUserById(String id) {
         Map<String, String> user = users
-            .stream()
-            .filter(u -> u.get("id").equals(id))
-            .findAny()
-            .orElse(null);
+                .stream()
+                .filter(u -> u.get("id").equals(id))
+                .findAny()
+                .orElse(null);
 
         return user;
     }
@@ -47,7 +46,7 @@ public class UsersServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
-                throws IOException, ServletException {
+            throws IOException, ServletException {
 
         String action = getAction(request);
 
@@ -74,8 +73,8 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request,
-                      HttpServletResponse response)
-                throws IOException, ServletException {
+                       HttpServletResponse response)
+            throws IOException, ServletException {
 
         String action = getAction(request);
 
@@ -95,8 +94,8 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void showUsers(HttpServletRequest request,
-                          HttpServletResponse response)
-                throws IOException, ServletException {
+                           HttpServletResponse response)
+            throws IOException, ServletException {
 
         request.setAttribute("users", users);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/users.jsp");
@@ -105,8 +104,8 @@ public class UsersServlet extends HttpServlet {
 
 
     private void showUser(HttpServletRequest request,
-                         HttpServletResponse response)
-                 throws IOException, ServletException {
+                          HttpServletResponse response)
+            throws IOException, ServletException {
         String id = getId(request);
 
         Map<String, String> user = getUserById(id);
@@ -123,7 +122,7 @@ public class UsersServlet extends HttpServlet {
 
     private void newUser(HttpServletRequest request,
                          HttpServletResponse response)
-                 throws IOException, ServletException {
+            throws IOException, ServletException {
 
         // BEGIN
         Map<String, String> user = new HashMap<>();
@@ -137,9 +136,11 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void createUser(HttpServletRequest request,
-                         HttpServletResponse response)
-                 throws IOException, ServletException {
+                            HttpServletResponse response)
+            throws IOException, ServletException {
+
         // BEGIN
+        Map<String, String> user = new HashMap<>();
         request.setAttribute("user", user);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/edit.jsp");
         requestDispatcher.forward(request, response);
@@ -147,8 +148,8 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void editUser(HttpServletRequest request,
-                         HttpServletResponse response)
-                 throws IOException, ServletException {
+                          HttpServletResponse response)
+            throws IOException, ServletException {
 
         String id = getId(request);
 
@@ -163,9 +164,9 @@ public class UsersServlet extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
-        String id = getNextId();
+        id = getNextId();
 
-        Map<String, String> user = new HashMap<>();
+        user = new HashMap<>();
         user.put("id", id);
         user.put("firstName", firstName);
         user.put("lastName", lastName);
@@ -186,8 +187,8 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void updateUser(HttpServletRequest request,
-                         HttpServletResponse response)
-                 throws IOException, ServletException {
+                            HttpServletResponse response)
+            throws IOException, ServletException {
 
         String id = getId(request);
 
@@ -225,8 +226,8 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void deleteUser(HttpServletRequest request,
-                         HttpServletResponse response)
-                 throws IOException, ServletException {
+                            HttpServletResponse response)
+            throws IOException, ServletException {
 
         String id = getId(request);
 
@@ -244,8 +245,8 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void destroyUser(HttpServletRequest request,
-                         HttpServletResponse response)
-                 throws IOException, ServletException {
+                             HttpServletResponse response)
+            throws IOException, ServletException {
 
         String id = getId(request);
 
