@@ -31,6 +31,7 @@
                             </div>
                             <button class="btn btn-primary" type="submit">Создать</button>
                         </form>
+
             <!-- END -->
         </div>
     </body>

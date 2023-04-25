@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.tomcat.jni.User;
 
 import static exercise.Data.getUsers;
 import static exercise.Data.getNextId;
@@ -139,7 +138,9 @@ public class UsersServlet extends HttpServlet {
     private void createUser(HttpServletRequest request,
                          HttpServletResponse response)
                  throws IOException, ServletException {
+
         // BEGIN
+        Map<String, String> user = new HashMap<>();
         request.setAttribute("user", user);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/edit.jsp");
         requestDispatcher.forward(request, response);
@@ -258,5 +259,6 @@ public class UsersServlet extends HttpServlet {
 
         users.remove(user);
         response.sendRedirect("/users");
+        // 12
     }
 }
