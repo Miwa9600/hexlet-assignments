@@ -166,7 +166,7 @@ public class UsersServlet extends HttpServlet {
         String email = request.getParameter("email");
 
         if (firstName.isEmpty() || lastName.isEmpty()) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/edit.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/new.jsp");
             request.setAttribute("user", user);
             request.setAttribute("error", "Имя и Фамилия не могут быть пустыми");
             response.setStatus(422);
