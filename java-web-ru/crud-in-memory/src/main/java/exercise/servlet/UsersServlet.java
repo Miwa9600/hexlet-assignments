@@ -140,7 +140,7 @@ public class UsersServlet extends HttpServlet {
                          HttpServletResponse response)
                  throws IOException, ServletException {
         // BEGIN
-        request.setAttribute("user", users);
+        request.setAttribute("user", user);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/edit.jsp");
         requestDispatcher.forward(request, response);
         // END
