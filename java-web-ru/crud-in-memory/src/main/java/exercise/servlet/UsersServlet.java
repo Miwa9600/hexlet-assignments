@@ -164,9 +164,9 @@ public class UsersServlet extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
-        id = getNextId();
+        String id = getNextId();
 
-        user = new HashMap<>();
+        Map<String, String> user = new HashMap<>();
         user.put("id", id);
         user.put("firstName", firstName);
         user.put("lastName", lastName);
