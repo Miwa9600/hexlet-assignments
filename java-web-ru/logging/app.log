@@ -1,0 +1,44 @@
+апр. 26, 2023 11:43:04 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8000"]
+апр. 26, 2023 11:43:04 PM org.apache.tomcat.util.net.NioSelectorPool getSharedSelector
+INFO: Using a shared selector for servlet write/read
+апр. 26, 2023 11:43:04 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Tomcat]
+апр. 26, 2023 11:43:04 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/8.5.69]
+апр. 26, 2023 11:43:04 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-8000"]
+апр. 26, 2023 11:43:30 PM exercise.servlet.SessionServlet login
+INFO: null
+апр. 26, 2023 11:43:56 PM exercise.servlet.SessionServlet login
+INFO: null
+апр. 26, 2023 11:44:01 PM exercise.servlet.SessionServlet login
+INFO: null
+апр. 26, 2023 11:44:27 PM exercise.servlet.SessionServlet login
+INFO: null
+апр. 26, 2023 11:54:35 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8000"]
+апр. 26, 2023 11:54:35 PM org.apache.tomcat.util.net.NioSelectorPool getSharedSelector
+INFO: Using a shared selector for servlet write/read
+апр. 26, 2023 11:54:36 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Tomcat]
+апр. 26, 2023 11:54:36 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/8.5.69]
+апр. 26, 2023 11:54:36 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-8000"]
+апр. 26, 2023 11:54:39 PM exercise.servlet.SessionServlet login
+INFO: User email:nazaryan655@gmail.com
+апр. 26, 2023 11:54:44 PM exercise.servlet.SessionServlet login
+INFO: User email:nazaryan655@gmail.com
+апр. 27, 2023 12:00:55 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8000"]
+апр. 27, 2023 12:00:55 AM org.apache.tomcat.util.net.NioSelectorPool getSharedSelector
+INFO: Using a shared selector for servlet write/read
+апр. 27, 2023 12:00:55 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Tomcat]
+апр. 27, 2023 12:00:55 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/8.5.69]
+апр. 27, 2023 12:00:55 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-8000"]
+апр. 27, 2023 12:00:57 AM exercise.servlet.SessionServlet login
+INFO: User email:nazaryan655@gmail.com
