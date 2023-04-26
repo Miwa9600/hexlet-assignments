@@ -42,3 +42,13 @@ INFO: Starting Servlet engine: [Apache Tomcat/8.5.69]
 INFO: Starting ProtocolHandler ["http-nio-8000"]
 апр. 27, 2023 12:00:57 AM exercise.servlet.SessionServlet login
 INFO: User email:nazaryan655@gmail.com
+апр. 27, 2023 12:22:30 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8000"]
+апр. 27, 2023 12:22:30 AM org.apache.tomcat.util.net.NioSelectorPool getSharedSelector
+INFO: Using a shared selector for servlet write/read
+апр. 27, 2023 12:22:30 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Tomcat]
+апр. 27, 2023 12:22:30 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/8.5.69]
+апр. 27, 2023 12:22:30 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-8000"]
