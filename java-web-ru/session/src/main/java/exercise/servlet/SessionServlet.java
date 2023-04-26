@@ -31,14 +31,18 @@ public class SessionServlet extends HttpServlet {
     }
 
     @Override
-    public void doPost(HttpServletRequest request,
-                      HttpServletResponse response)
-                throws IOException, ServletException {
-
-        switch (request.getRequestURI()) {
-            case "/login" -> login(request, response);
-            case "/logout" -> logout(request, response);
-            default -> response.sendError(HttpServletResponse.SC_NOT_FOUND);
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String requestUri = request.getRequestURI();
+        switch (requestUri) {
+            case "/login":
+                login(request, response);
+                break;
+            case "/logout":
+                logout(request, response);
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                break;
         }
     }
 
