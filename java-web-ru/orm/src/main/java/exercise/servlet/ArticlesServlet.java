@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import io.ebean.DB;
+import io.ebean.typequery.PLong;
 import org.apache.commons.lang3.ArrayUtils;
 import io.ebean.PagedList;
 
@@ -87,10 +88,13 @@ public class ArticlesServlet extends HttpServlet {
         int offset = (normalizedPage - 1) * articlesPerPage;
 
         // BEGIN
-        PagedList<Article> Articles = DB.find(Article.class)
-                .where().eq("articles", Article.class)
-                .order().asc("id")
+        PagedList<Article> articles = DB.find(Article.class)
+                .orderBy().asc("id")
+                .setFirstRow(offset)
+                .setMaxRows(articlesPerPage)
                 .findPagedList();
+
+        request.setAttribute("articles", articles.getList());
         // END
         request.setAttribute("page", normalizedPage);
         TemplateEngineUtil.render("articles/index.html", request, response);
@@ -103,7 +107,9 @@ public class ArticlesServlet extends HttpServlet {
         long id = Long.parseLong(getId(request));
 
         // BEGIN
-        Article article = DB.find(Article.class, id);
+        Article article = new QArticle()
+                .id.eq(id)
+                .findOne();
         request.setAttribute("article", article);
         // END
         TemplateEngineUtil.render("articles/show.html", request, response);
@@ -114,13 +120,18 @@ public class ArticlesServlet extends HttpServlet {
                     throws IOException, ServletException {
 
         // BEGIN
-        PagedList<Category> category = DB.find(Category.class)
-                .where().eq("categories", Category.class)
-                .findPagedList();
+        List<Category> categories = new QCategory().id.asc().findList();
+
+        request.setAttribute("categories", categories);
 
         // END
         TemplateEngineUtil.render("articles/new.html", request, response);
     }
+
+     /*   PagedList<Category> category = DB.find(Category.class)
+                .where().eq("categories", Category.class)
+                .findPagedList();
+*/
 
     private void createArticle(HttpServletRequest request,
                          HttpServletResponse response)
@@ -132,7 +143,8 @@ public class ArticlesServlet extends HttpServlet {
         String categoryId = request.getParameter("categoryId");
 
         // BEGIN
-        Category category = DB.find(Category.class, Long.parseLong(categoryId));
+        Category category = new QCategory().id.eq(Integer.parseInt(categoryId)).findOne();
+
         Article article = new Article(title, body, category);
         article.save();
         // END
@@ -141,3 +153,8 @@ public class ArticlesServlet extends HttpServlet {
         response.sendRedirect("/articles");
     }
 }
+/*
+    Category category = DB.find(Category.class, Long.parseLong(categoryId));
+    Article article = new Article(title, body, category);
+        article.save();
+*/
