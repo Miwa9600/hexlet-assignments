@@ -110,6 +110,7 @@ public class ArticlesServlet extends HttpServlet {
         Article article = new QArticle()
                 .id.eq(id)
                 .findOne();
+
         request.setAttribute("article", article);
         // END
         TemplateEngineUtil.render("articles/show.html", request, response);
