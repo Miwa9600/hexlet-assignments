@@ -32,41 +32,42 @@ class AppTest {
     }
 
     @Test
-    void testValidUserData() {
-        // Валидные данные пользователя
-        String firstName = "John";
-        String lastName = "Doe";
-        String email = "johndoe@example.com";
-        String password = "password";
+    void testPositive() {
 
-        // Отправляем POST запрос с валидными данными
-        HttpResponse<String> response = Unirest
+        String firstName = "Aleksandr";
+        String lastName = "Vasiliev";
+        String email = "aleks@yandex.ru";
+        String password = "123456";
+
+        HttpResponse<String> responsePost = Unirest
                 .post(baseUrl + "/users")
                 .field("firstName", firstName)
                 .field("lastName", lastName)
                 .field("email", email)
                 .field("password", password)
-                .asString();
+                .asEmpty();
 
-        // Проверяем код ответа
-        assertThat(response.getStatus()).isEqualTo(302);
+        assertThat(responsePost.getStatus()).isEqualTo(302);
 
-        // Проверяем, что новый пользователь добавлен в базу данных
-        User newUser = new QUser().email.eq(email).findOne();
-        assertThat(newUser).isNotNull();
-        assertThat(newUser.getFirstName()).isEqualTo(firstName);
-        assertThat(newUser.getLastName()).isEqualTo(lastName);
+        User actualUser = new QUser()
+                .lastName.equalTo(lastName)
+                .findOne();
+
+        assertThat(actualUser).isNotNull();
+        assertThat(actualUser.getFirstName()).isEqualTo(firstName);
+        assertThat(actualUser.getLastName()).isEqualTo(lastName);
+        assertThat(actualUser.getEmail()).isEqualTo(email);
     }
 
     @Test
-    void testInvalidUserData() {
+    void testNegative() {
+
         String firstName = "";
-        String lastName = "Doe";
-        String email = "johndoe@example.com";
-        String password = "password";
+        String lastName = "Petroff";
+        String email = "yandex.ru";
+        String password = "as";
 
-
-        HttpResponse<String> response = Unirest
+        HttpResponse<String> responsePost = Unirest
                 .post(baseUrl + "/users")
                 .field("firstName", firstName)
                 .field("lastName", lastName)
@@ -74,15 +75,21 @@ class AppTest {
                 .field("password", password)
                 .asString();
 
-        // Проверяем код ответа
-        assertThat(response.getStatus()).isEqualTo(422);
+        assertThat(responsePost.getStatus()).isEqualTo(422);
 
-        User newUser = new QUser().email.eq(email).findOne();
-        assertThat(newUser).isNull();
+        User actualUser = new QUser()
+                .lastName.equalTo(lastName)
+                .findOne();
 
-        String responseBody = response.getBody();
-        assertThat(responseBody).contains("Invalid first name");
-        assertThat(responseBody).contains("User could not be created");
+        assertThat(actualUser).isNull();
+
+        String content = responsePost.getBody();
+
+        assertThat(content).contains("yandex.ru");
+        assertThat(content).contains("Petroff");
+        assertThat(content).contains("Имя не должно быть пустым");
+        assertThat(content).contains("Должно быть валидным email");
+        assertThat(content).contains("Пароль должен содержать не менее 4 символов");
     }
     // END
 
