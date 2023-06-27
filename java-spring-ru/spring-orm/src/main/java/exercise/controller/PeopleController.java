@@ -36,8 +36,8 @@ public class PeopleController {
     @PostMapping(path = "")
     public Person createPerson(@RequestBody PersonDto personDto) {
         Person person = new Person();
-        person.setName(personDto.getName());
-        person.setAge(personDto.getAge());
+        person.setFirst_name(personDto.getFirstName());
+        person.setLast_name(personDto.getLastName());
         return personRepository.save(person);
     }
 
